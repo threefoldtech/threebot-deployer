@@ -37,12 +37,12 @@ export const deployer = fb.group({
           };
         }
       },
-      async (ctrl) => {
-        const userBalance = await getBalance(ctrl.value);
-        if (userBalance.free < 1) {
-          return { message: noBalanceMessage };
-        }
-      },
+      // async (ctrl) => {
+      //   const userBalance = await getBalance(ctrl.value);
+      //   if (userBalance.free < 1) {
+      //     return { message: noBalanceMessage + 'From here' };
+      //   }
+      // },
     ],
   ],
   sshKey: [

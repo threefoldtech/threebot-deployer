@@ -3,13 +3,8 @@
 <script lang="ts">
   import { TerminalStatus, type TerminalHistory } from '../utils/terminal';
 
-  //   let isError: boolean;
-  //   let message: string;
-  //   let stateType: string;
   let pindingMessage: string;
-  //   let status: string;
   let intervalId: NodeJS.Timer | undefined;
-
   let logs: TerminalHistory[] = [];
 
   export function commit(
@@ -55,7 +50,6 @@
 </script>
 
 <div
-  style:height="100vh"
   style:width="100%"
   style:display="flex"
   style:justify-content="center"
@@ -90,42 +84,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .terminal .box {
-    width: 800px;
-    background: #161616;
-    height: 400px;
-    color: wheat;
-    border-radius: 0px 0px 15px 15px;
-    padding: 5px;
-  }
-  .terminal .header {
-    width: 100%;
-    background: #282c2b;
-    height: 25px;
-    border-radius: 15px 15px 0px 0px;
-    position: relative;
-  }
-  .terminal .dot-red {
-    background: #ff1111;
-    left: 15px;
-  }
-  .terminal .dot-yellow {
-    background: #ecb80c;
-    left: 35px;
-  }
-  .terminal .dot-green {
-    background: #53ec0c;
-    left: 55px;
-  }
-  .terminal .dot {
-    position: absolute;
-    width: 2px;
-    top: 6px;
-    height: 2px;
-    padding: 5px;
-    border-radius: 50%;
-    border: 0.1px solid #ffffff57;
-  }
-</style>

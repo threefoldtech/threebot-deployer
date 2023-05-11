@@ -24,6 +24,8 @@
 <script lang="ts">
   import Modal from './components/ui/modals/Modal.svelte';
   import type { FormControlValue } from 'tf-svelte-rx-forms/dist/types';
+  import { TerminalStatus } from './utils/terminal';
+  import Terminal from './components/Terminal.svelte';
   const { btn } = window.tfSvelteBulmaWc;
 
   let active = 'credentials';
@@ -240,12 +242,13 @@
       </section>
 
       <section class:d-none={!deploying}>
-        <b-notification
+        <Terminal on:commit={() => {}}/>
+        <!-- <b-notification
           color={error ? 'danger' : success ? 'success' : 'info'}
           light
         >
           [+] {message || 'Loading..'}.
-        </b-notification>
+        </b-notification> -->
       </section>
 
       <div class="is-flex mt-2 is-align-items-center">
