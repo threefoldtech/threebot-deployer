@@ -24,9 +24,7 @@ dist-ssr
 *.sw?
 /node_modules/
 /public/build/
-/public/config.js
-/dist/
+dist/
 .DS_Store
 .vscode
 .node_modules
-./public/config.js

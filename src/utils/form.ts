@@ -56,7 +56,7 @@ export const deployer = fb.group({
   ],
 
   name: [
-    generateString(10, 'dep'),
+    generateString(10, window.config.projectNamePrefix),
     [
       validators.required('deployer instance\'s name is required.'),
       validators.isAlphanumeric(

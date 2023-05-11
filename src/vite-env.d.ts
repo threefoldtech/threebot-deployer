@@ -25,6 +25,7 @@ declare global {
 
     config: {
       network: string;
+      projectNamePrefix: string;
     };
   }
 }

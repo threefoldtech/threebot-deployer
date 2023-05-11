@@ -18,14 +18,14 @@ export async function getNameAndGatewayContracts(
           deploymentData_contains: '"projectName":"ThreebotDeployer"',
           AND: {
             // eslint-disable-next-line no-useless-escape
-            deploymentData_contains: `\"name\":\"dep${twinId}${name}\"`,
+            deploymentData_contains: `\"name\":\"${window.config.projectNamePrefix}${twinId}${name}\"`,
           },
         },
       },
     ],
     nameContracts: [
       { contractID: true },
-      { where: { twinID_eq: twinId, name_eq: `dep${twinId}${name}` } },
+      { where: { twinID_eq: twinId, name_eq: `${window.config.projectNamePrefix}${twinId}${name}` } },
     ],
   });
   return [
