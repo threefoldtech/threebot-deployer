@@ -37,7 +37,6 @@
           counter = (counter % 3) + 1;
         }, 500);
         break;
-
       default:
         // handle other statuses here
         if (intervalId !== undefined) {

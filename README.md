@@ -66,6 +66,7 @@ This will install all the required packages and libraries needed to run the proj
 window.config = {
   // Choose which network you'll work against, available nets = [dev, qa, test, main]
   network: 'dev',
+  projectNamePrefix: 'dep',
 };
 ```
 

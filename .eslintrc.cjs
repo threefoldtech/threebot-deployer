@@ -1,6 +1,9 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [ '@typescript-eslint', 'svelte3' ],
+  globals: {
+    'NodeJS': true
+  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',

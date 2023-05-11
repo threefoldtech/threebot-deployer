@@ -1,4 +1,4 @@
 window.config = {
   network: 'dev',
-  projectNamePrefix: 'dep'
+  projectNamePrefix: 'dep',
 };

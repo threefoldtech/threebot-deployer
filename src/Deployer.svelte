@@ -119,7 +119,7 @@
           { key: 'SSH_KEY', value: value.sshKey },
           { key: 'TFCHAIN_KEY', value: value.mnemonic },
           { key: 'ETH_PUBLIC_KEY', value: $metaMaskPK },
-          { key: "LOCAL_DOMAIN", value: `${domainName}.${nodeDomain}` },
+          { key: 'LOCAL_DOMAIN', value: `${domainName}.${nodeDomain}` },
         ],
         metadata: JSON.stringify({
           type: 'vm',
@@ -144,6 +144,8 @@
       success = true;
       message = 'Successfully deployed.';
       terminal.commit('Deployment stage', message, TerminalStatus.success);
+      window.deploymentList?.reload();
+      window.deploymentList?.setDisabled(false);
       isUp = true;
       showDeployedData = true;
     } catch (e) {

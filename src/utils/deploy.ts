@@ -75,8 +75,6 @@ function __createNetwork() {
 }
 
 export async function deployVM(options: VMOptions) {
-  console.log('options', options);
-
   const vm = new MachineModel();
   vm.name = options.name;
   vm.node_id = options.nodeId;
@@ -99,8 +97,6 @@ export async function deployVM(options: VMOptions) {
   vms.metadata = options.metadata;
 
   const grid = await getGrid(options.mnemonic);
-  console.log('grid', grid);
-  console.log('vms', vms);
 
   await grid.machines.deploy(vms);
   return grid.machines.getObj(options.name);
@@ -127,7 +123,9 @@ export interface GatewayOptions {
 export async function getDomainName(mnemonic: string, name: string) {
   const grid = await getGrid(mnemonic);
   const twinId = await grid.twins.get_my_twin_id();
-  return `${window.config.projectNamePrefix}${twinId}${name.toLocaleLowerCase()}`;
+  return `${
+    window.config.projectNamePrefix
+  }${twinId}${name.toLocaleLowerCase()}`;
 }
 
 export async function deployGateway(options: GatewayOptions) {
