@@ -114,18 +114,18 @@
       limit === 0
         ? []
         : await gql
-            .nodes({ farmID: true }, { where, orderBy, limit })
-            .then((nodes) => {
-              return gql.farms(
-                { name: true, farmID: true },
-                {
-                  where: {
-                    farmID_in: Array.from(new Set(nodes.map((n) => n.farmID))),
-                  },
-                  orderBy: ['farmID_ASC'],
+          .nodes({ farmID: true }, { where, orderBy, limit })
+          .then((nodes) => {
+            return gql.farms(
+              { name: true, farmID: true },
+              {
+                where: {
+                  farmID_in: Array.from(new Set(nodes.map((n) => n.farmID))),
                 },
-              );
-            });
+                orderBy: ['farmID_ASC'],
+              },
+            );
+          });
 
     farmLoaded = true;
     loadNodes(f);

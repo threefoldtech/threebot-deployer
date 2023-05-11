@@ -29,21 +29,21 @@
     if (logs.length) {
       const lastMessage = logs[logs.length - 1];
       switch (lastMessage.status) {
-        case TerminalStatus.pinding:
-          let counter = 1;
-          intervalId = setInterval(() => {
-            const dots = '.'.repeat(counter);
-            pindingMessage = `${lastMessage.message}${dots}`;
-            counter = (counter % 3) + 1;
-          }, 500);
-          break;
+      case TerminalStatus.pinding:
+        let counter = 1;
+        intervalId = setInterval(() => {
+          const dots = '.'.repeat(counter);
+          pindingMessage = `${lastMessage.message}${dots}`;
+          counter = (counter % 3) + 1;
+        }, 500);
+        break;
 
-        default:
-          // handle other statuses here
-          if (intervalId !== undefined) {
-            clearInterval(intervalId);
-          }
-          break;
+      default:
+        // handle other statuses here
+        if (intervalId !== undefined) {
+          clearInterval(intervalId);
+        }
+        break;
       }
     }
   };

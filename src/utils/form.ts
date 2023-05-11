@@ -53,14 +53,14 @@ export const deployer = fb.group({
     '',
     [
       validators.required('Public SSH Key is required.'),
-      isValidSSH("Public SSH Key doesn't seem to be valid."),
+      isValidSSH('Public SSH Key doesn\'t seem to be valid.'),
     ],
   ],
 
   name: [
     generateString(10, 'dep'),
     [
-      validators.required("deployer instance's name is required."),
+      validators.required('deployer instance\'s name is required.'),
       validators.isAlphanumeric(
         'Name can only include alphanumeric characters.',
       ),
@@ -71,13 +71,13 @@ export const deployer = fb.group({
   flist: [
     'https://hub.grid.tf/tf-official-vms/ubuntu-22.04.flist',
     [
-      validators.required("deployer instance's flist is required."),
+      validators.required('deployer instance\'s flist is required.'),
       validators.isURL('The flist should be a link.'),
     ],
   ],
   entryPoint: [
     '/sbin/zinit init',
-    [validators.required("deployer instance's entry point is required.")],
+    [validators.required('deployer instance\'s entry point is required.')],
   ],
   cpu: [
     2,

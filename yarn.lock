@@ -1232,14 +1232,14 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@threefold/grid_client@^2.0.0-rc4":
-  version "2.0.0-rc4"
-  resolved "https://registry.yarnpkg.com/@threefold/grid_client/-/grid_client-2.0.0-rc4.tgz#aa16641d1fff84a07765cda7d8e5e6effcc2a237"
-  integrity sha512-s/fGSnv7iIwhjE8hyWILiNiV9r2FwJFU77UQLbzmx/QW8CEKTa7jvFAvEO3nE2IuQVEViJ7hDy5r2cYitqilZg==
+"@threefold/grid_client@^2.0.0-rc6":
+  version "2.0.0-rc7"
+  resolved "https://registry.yarnpkg.com/@threefold/grid_client/-/grid_client-2.0.0-rc7.tgz#55b1392fe11414c59b7ed94f2dd0f528fcdd94ef"
+  integrity sha512-8G+9BBSA0hrnbs3/7gokBUqUyHW2eedTO+0lmvlTJe9LX/Pa0Anfd/eUneiRt21dhSOYvSY8rhAaOXo5x4CkxA==
   dependencies:
     "@jimber/pkid" "1.0.4"
     "@noble/secp256k1" "^1.7.1"
-    "@threefold/rmb_direct_client" "^2.0.0-rc4"
+    "@threefold/rmb_direct_client" "^2.0.0-rc7"
     algosdk "^1.19.0"
     appdata-path "^1.0.0"
     await-lock "^2.1.0"
@@ -1266,10 +1266,10 @@
     url-parse "^1.5.10"
     uuid4 "^2.0.2"
 
-"@threefold/rmb_direct_client@^2.0.0-rc4":
-  version "2.0.0-rc4"
-  resolved "https://registry.yarnpkg.com/@threefold/rmb_direct_client/-/rmb_direct_client-2.0.0-rc4.tgz#ba561fa068b73e04252aee4a97c53653749524d8"
-  integrity sha512-ejG0VbtBIDBDq0737eDCMm7GacuD62ChvRCFyume+U3Ybcjzx1fWhNDmbcuGspinOkEefRuSa7mcjggPVkiTJA==
+"@threefold/rmb_direct_client@^2.0.0-rc7":
+  version "2.0.0-rc7"
+  resolved "https://registry.yarnpkg.com/@threefold/rmb_direct_client/-/rmb_direct_client-2.0.0-rc7.tgz#054e0128b6cb0405f225f25987cdf2ba11a8c125"
+  integrity sha512-shYl6Yk53Yv5zkNf9RyGiHXoSyzna9VSYYAugwEY4NbCgxPxFTT2NYYUi+uYbJIMyu7B82Auv22a28EviQ5z8A==
   dependencies:
     "@noble/secp256k1" "^1.7.1"
     "@polkadot/api" "^8.9.1"
@@ -5270,6 +5270,11 @@ svelte-check@^2.10.3:
     sade "^1.7.4"
     svelte-preprocess "^4.0.0"
     typescript "*"
+
+svelte-copy@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/svelte-copy/-/svelte-copy-1.3.2.tgz#28b42c2879efe99dc7aeb06fde71e7becc1e2333"
+  integrity sha512-hGJoZ5aheuMV6exG2UbOj+kfUZGBeQzCy0vWDMIOpqQkizEuF5Xj/cTZ1LT3ivYNtRlX6dRLa9NQ97UTMdnYnQ==
 
 svelte-hmr@^0.15.1:
   version "0.15.1"
