@@ -33,6 +33,8 @@ export async function getNameAndGatewayContracts(
     nodeContractsCount: nodeContractsCount,
     nameContractsCount: nameContractsCount,
   });
+  console.log('contracts', contracts);
+  
   return [
     ...contracts.data.nameContracts.map((x) => +x.contractID),
     ...contracts.data.nodeContracts.map((x) => +x.contractID),
