@@ -146,6 +146,7 @@
       isUp = true;
       showDeployedData = true;
     } catch (e) {
+      console.log(e);
       message = e.message;
       terminal.commit('Deployment stage', message, TerminalStatus.failed);
       error = true;

@@ -28,6 +28,8 @@ export async function getNameAndGatewayContracts(
       { where: { twinID_eq: twinId, name_eq: `${window.config.projectNamePrefix}${twinId}${name}` } },
     ],
   });
+  console.log('contracts', contracts);
+  
   return [
     ...contracts.nameContracts.map((x) => +x.contractID),
     ...contracts.nodeContracts.map((x) => +x.contractID),

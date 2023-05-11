@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@polkadot/api": "^9.10.1",
-    "@threefold/grid_client": "^2.0.0-rc6",
+    "@threefold/grid_client": "^2.0.0-rc8",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "bip39": "^3.0.4",
