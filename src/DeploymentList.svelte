@@ -60,7 +60,7 @@
   }
 
   async function listDeployments() {
-    loading = true;
+  
     const grid = await getGrid(mnemonic$.value);
     const names = await grid.machines.list();
     const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
@@ -89,7 +89,6 @@
     }
     instances = _instances;
     billingRate = _billingRate;
-    loading = false;
   }
 
   let __mnemonicValid = false;
@@ -105,14 +104,15 @@
   let table: Table;
 
   export function reload() {
+    loading = true;
     listDeployments();
+    loading = false;
   }
 
   export function setDisabled(value: boolean) {
     disableReload = value;
   }
 </script>
-
 <b-box
   class:mb-6={true}
   class:p-6={true}
