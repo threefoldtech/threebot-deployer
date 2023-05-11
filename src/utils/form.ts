@@ -17,8 +17,12 @@ export const deployer = fb.group({
     [
       async (ctrl) => {
         try {
+          console.log('ctrl.value', ctrl.value);
+
           await getGrid(ctrl.value);
-        } catch {
+        } catch (e) {
+          console.log(e);
+
           return {
             message: `
           <strong>
@@ -37,26 +41,26 @@ export const deployer = fb.group({
           };
         }
       },
-      // async (ctrl) => {
-      //   const userBalance = await getBalance(ctrl.value);
-      //   if (userBalance.free < 1) {
-      //     return { message: noBalanceMessage + 'From here' };
-      //   }
-      // },
+      async (ctrl) => {
+        const userBalance = await getBalance(ctrl.value);
+        if (userBalance.free < 0.001) {
+          return { message: noBalanceMessage + 'From here' };
+        }
+      },
     ],
   ],
   sshKey: [
     '',
     [
       validators.required('Public SSH Key is required.'),
-      isValidSSH('Public SSH Key doesn\'t seem to be valid.'),
+      isValidSSH("Public SSH Key doesn't seem to be valid."),
     ],
   ],
 
   name: [
     generateString(10, 'dep'),
     [
-      validators.required('deployer instance\'s name is required.'),
+      validators.required("deployer instance's name is required."),
       validators.isAlphanumeric(
         'Name can only include alphanumeric characters.',
       ),
@@ -67,13 +71,13 @@ export const deployer = fb.group({
   flist: [
     'https://hub.grid.tf/tf-official-vms/ubuntu-22.04.flist',
     [
-      validators.required('deployer instance\'s flist is required.'),
+      validators.required("deployer instance's flist is required."),
       validators.isURL('The flist should be a link.'),
     ],
   ],
   entryPoint: [
     '/sbin/zinit init',
-    [validators.required('deployer instance\'s entry point is required.')],
+    [validators.required("deployer instance's entry point is required.")],
   ],
   cpu: [
     2,
@@ -98,7 +102,7 @@ export const deployer = fb.group({
     ],
   ],
   disk: [
-    100,
+    20,
     [
       validators.required('Disk is required.'),
       validators.isInt('Disk must be a valid integer.', {

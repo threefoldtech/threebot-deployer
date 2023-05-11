@@ -76,7 +76,7 @@ function __createNetwork() {
 
 export async function deployVM(options: VMOptions) {
   console.log('options', options);
-  
+
   const vm = new MachineModel();
   vm.name = options.name;
   vm.node_id = options.nodeId;
@@ -101,7 +101,7 @@ export async function deployVM(options: VMOptions) {
   const grid = await getGrid(options.mnemonic);
   console.log('grid', grid);
   console.log('vms', vms);
-  
+
   await grid.machines.deploy(vms);
   return grid.machines.getObj(options.name);
 }

@@ -12,7 +12,6 @@
     getDomainName,
     deployGateway,
     deployer,
-    listenUntillUp,
     checkNode,
     metaMaskPK,
   } from './utils';
@@ -24,8 +23,7 @@
 <script lang="ts">
   import Modal from './components/ui/modals/Modal.svelte';
   import type { FormControlValue } from 'tf-svelte-rx-forms/dist/types';
-  import { TerminalStatus } from './utils/terminal';
-  import Terminal from './components/Terminal.svelte';
+  import { TerminalStatus, type TerminalComponent } from './utils/terminal';
   const { btn } = window.tfSvelteBulmaWc;
 
   let active = 'credentials';
@@ -33,6 +31,7 @@
   $: mnemonic = deployer$.value.mnemonic;
   $: sshKey = deployer$.value.sshKey;
   $: validCredentials = mnemonic.valid && sshKey.valid;
+  let terminal: TerminalComponent;
 
   let deploying = false;
   let error = false;
@@ -40,7 +39,6 @@
   let message = '';
   let deployedData: any;
   let showDeployedData = false;
-  let listener: (() => void) | undefined;
   let isUp = false;
   async function onDeploy() {
     const { value } = deployer;
@@ -90,14 +88,15 @@
     window.deploymentList?.setDisabled(true);
     error = false;
     success = false;
-    if (listener) {
-      listener();
-      listener = undefined;
-    }
-    isUp = false;
 
     try {
-      events.addListener('logs', (msg: any) => (message = msg));
+      events.addListener(
+        'logs',
+        (msg: any) => (
+          (message = msg),
+          terminal.commit('Deployment stage', message, TerminalStatus.requested)
+        ),
+      );
 
       const domainName = await getDomainName(value.mnemonic, value.name);
       const [publicNodeId, nodeDomain] = value.gateway.split(':');
@@ -143,18 +142,12 @@
       deployedData = vm;
       success = true;
       message = 'Successfully deployed.';
-
-      const [up, done] = listenUntillUp(`https://${domainName}.${nodeDomain}`);
-      listener = done;
-      up.then(() => {
-        window.deploymentList?.reload();
-        window.deploymentList?.setDisabled(false);
-        isUp = true;
-        listener = undefined;
-        showDeployedData = true;
-      });
+      terminal.commit('Deployment stage', message, TerminalStatus.success);
+      isUp = true;
+      showDeployedData = true;
     } catch (e) {
       message = e.message;
+      terminal.commit('Deployment stage', message, TerminalStatus.failed);
       error = true;
     }
 
@@ -195,7 +188,7 @@
   style:font-family="'Lato', sans-serif"
 >
   <b-content>
-    <h2 class="has-text-centered is-size-1 mt-0">The Threebot Deployer</h2>
+    <h2 class="has-text-centered is-size-1 mt-0">Threebot Deployer</h2>
     <p>
       Threebot deployer app makes it simple and hassle-free to deploy your own
       web3 proxy, With user-friendly interface, you can create and manage your
@@ -242,13 +235,7 @@
       </section>
 
       <section class:d-none={!deploying}>
-        <Terminal on:commit={() => {}}/>
-        <!-- <b-notification
-          color={error ? 'danger' : success ? 'success' : 'info'}
-          light
-        >
-          [+] {message || 'Loading..'}.
-        </b-notification> -->
+        <tf-terminal bind:this={terminal} />
       </section>
 
       <div class="is-flex mt-2 is-align-items-center">
@@ -270,22 +257,13 @@
                 success = false;
                 error = false;
                 isUp = false;
-                if (listener) {
-                  listener();
-                  listener = undefined;
-                }
               }
             : undefined}
         >
           {deploying ? 'Back' : 'Deploy'}
         </button>
         <div style:width="100%" class="ml-2">
-          {#if listener}
-            <b-notification color="warning" light>
-              <b-icon icon="fas fa-spinner fa-pulse" />
-              Waiting for your deployment to be up and running...
-            </b-notification>
-          {:else if isUp}
+          {#if isUp}
             <b-notification color="success" light>
               <b-icon icon="fa-solid fa-circle-check" />
               Your deployment is up and running.

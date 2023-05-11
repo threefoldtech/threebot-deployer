@@ -36,7 +36,7 @@
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "@polkadot/api": "^9.10.1",
-    "@threefold/grid_client": "^2.0.0-rc4",
+    "@threefold/grid_client": "^2.0.0-rc6",
     "bip39": "^3.0.4",
     "buffer": "^6.0.3",
     "decimal.js": "^10.4.2",

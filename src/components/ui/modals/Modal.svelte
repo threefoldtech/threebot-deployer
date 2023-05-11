@@ -38,13 +38,6 @@
     inputs.push({ label: 'CPU(vCores)', controller: fb.control(v.capacity.cpu), cmp: Input });
     inputs.push({ label: 'Memory(MB)', controller: fb.control(v.capacity.memory), cmp: Input });
     inputs.push({ label: 'Domain', controller: fb.control(`https://${v.env.LOCAL_DOMAIN}`), cmp: Input , url: true});
-    inputs.push({ label: 'Super Username', controller: fb.control(v.env.SUPERUSER_USERNAME), cmp: Input });
-    inputs.push({ label: 'Super Email', controller: fb.control(v.env.SUPERUSER_EMAIL), cmp: Input });
-    inputs.push({ label: 'Super Password', controller: fb.control(v.env.SUPERUSER_PASSWORD), cmp: Input });
-    const ip = v.publicIP && v.publicIP.ip ? v.publicIP.ip.replace('/25', '') : `[${v.planetary}]`; 
-    inputs.push({ label: 'Code-Server', controller: fb.control(`http://${ip}:8001`), cmp: Input, url: true });
-    inputs.push({ label: 'Webmin', controller: fb.control(`http://${ip}:8002`), cmp: Input, url: true });
-
     inputs = [...inputs];
   });
   onDestroy(() => {

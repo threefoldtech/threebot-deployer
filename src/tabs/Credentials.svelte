@@ -34,8 +34,8 @@
     window.config.network === 'main'
       ? 'GBNOTAYUMXVO5QDYWYO2SOCOYIJ3XFIP65GKOQN7H65ZZSO6BK4SLWSC'
       : window.config.network === 'test'
-        ? 'GA2CWNBUHX7NZ3B5GR4I23FMU7VY5RPA77IUJTIXTTTGKYSKDSV6LUA4'
-        : 'GDHJP6TF3UXYXTNEZ2P36J5FH7W4BJJQ4AYYAXC66I2Q2AH5B6O6BCFG';
+      ? 'GA2CWNBUHX7NZ3B5GR4I23FMU7VY5RPA77IUJTIXTTTGKYSKDSV6LUA4'
+      : 'GDHJP6TF3UXYXTNEZ2P36J5FH7W4BJJQ4AYYAXC66I2Q2AH5B6O6BCFG';
   let twinId: number;
   let __mnemonic2: string;
   $: if (isMnemonicValid && __mnemonic2 !== mnemonic$.value) {
@@ -95,7 +95,7 @@
           requestAnimationFrame(() => {
             __ssh = JSON.parse(value).sshkey;
             __mnemonic = mnemonic$.value;
-            deployer.get('sshKey').setValue(__ssh);
+            deployer.get('sshKey').setValue(__ssh.trim());
           });
         }
       })

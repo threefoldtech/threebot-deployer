@@ -19,7 +19,7 @@ export function isValidSSH(message: string) {
 
 export function ismnemonic(ctrl: FormControl<string>) {
   const v = ctrl.value;
-  const message = 'Mnemonic doesn\'t seem to be valid.';
+  const message = "Mnemonic doesn't seem to be valid.";
   if (typeof v !== 'string') return { message };
   const words = new Set(v.split(' '));
   if (words.size !== 12) return { message };
