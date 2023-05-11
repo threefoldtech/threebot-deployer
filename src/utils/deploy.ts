@@ -127,7 +127,7 @@ export interface GatewayOptions {
 export async function getDomainName(mnemonic: string, name: string) {
   const grid = await getGrid(mnemonic);
   const twinId = await grid.twins.get_my_twin_id();
-  return `md${twinId}${name.toLocaleLowerCase()}`;
+  return `${window.config.projectNamePrefix}${twinId}${name.toLocaleLowerCase()}`;
 }
 
 export async function deployGateway(options: GatewayOptions) {
@@ -135,7 +135,7 @@ export async function deployGateway(options: GatewayOptions) {
   gw.name = options.domainName;
   gw.node_id = options.publicNodeId;
   gw.tls_passthrough = false;
-  gw.backends = [`http://[${options.planetaryIp}]:3000`];
+  gw.backends = [`http://[${options.planetaryIp}]:8000`];
   gw.solutionProviderID = options.solutionProviderID;
   gw.metadata = options.metadata;
 

@@ -74,7 +74,7 @@ export const deployer = fb.group({
     ],
   ],
   entryPoint: [
-    '/sbin/zinit init',
+    '/usr/bin/python3 -m http.server --bind ::',
     [validators.required('deployer instance\'s entry point is required.')],
   ],
   cpu: [
