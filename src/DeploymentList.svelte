@@ -60,35 +60,39 @@
   }
 
   async function listDeployments() {
-  
-    const grid = await getGrid(mnemonic$.value);
-    const names = await grid.machines.list();
-    const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
-    const _instances: any[] = [];
-    const _billingRate: any[] = [];
-    const rates: Promise<Decimal>[] = [];
-    for await (const item of items) {
-      const i = item?.at(0);
-      if (i) {
-        _instances.push(i);
-        rates.push(
-          Promise.all(
-            (await getNameAndGatewayContracts(mnemonic$.value, i.name))
-              .concat(i.contractId)
-              .map((id) => grid.contracts.getConsumption({ id })),
-          ).then((p) => p.reduce((a, b) => a.add(b), new Decimal('0'))),
+    try {
+      const grid = await getGrid(mnemonic$.value);
+      const names = await grid.machines.list();
+      const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
+      const _instances: any[] = [];
+      const _billingRate: any[] = [];
+      const rates: Promise<Decimal>[] = [];
+      for await (const item of items) {
+        const i = item?.at(0);
+        if (i) {
+          _instances.push(i);
+          rates.push(
+            Promise.all(
+              (await getNameAndGatewayContracts(mnemonic$.value, i.name))
+                .concat(i.contractId)
+                .map((id) => grid.contracts.getConsumption({ id })),
+            ).then((p) => p.reduce((a, b) => a.add(b), new Decimal('0'))),
+          );
+        }
+      }
+      for await (const item of rates) {
+        _billingRate.push(
+          item.isNaN() || item.lessThanOrEqualTo(0)
+            ? 'No Data Available'
+            : item.toFixed() + ' TFT/hour',
         );
       }
+      instances = _instances;
+      billingRate = _billingRate;
+    } catch (e) {
+      console.log(e);
+      loading = false;
     }
-    for await (const item of rates) {
-      _billingRate.push(
-        item.isNaN() || item.lessThanOrEqualTo(0)
-          ? 'No Data Available'
-          : item.toFixed() + ' TFT/hour',
-      );
-    }
-    instances = _instances;
-    billingRate = _billingRate;
   }
 
   let __mnemonicValid = false;
@@ -113,6 +117,7 @@
     disableReload = value;
   }
 </script>
+
 <b-box
   class:mb-6={true}
   class:p-6={true}
