@@ -37,7 +37,7 @@
     inputs.push({ label: 'Planetary', controller: fb.control(v.planetary), cmp: Input });
     inputs.push({ label: 'CPU(vCores)', controller: fb.control(v.capacity.cpu), cmp: Input });
     inputs.push({ label: 'Memory(MB)', controller: fb.control(v.capacity.memory), cmp: Input });
-    // inputs.push({ label: 'Domain', controller: fb.control(`https://${v.env.LOCAL_DOMAIN}`), cmp: Input , url: true});
+    inputs.push({ label: 'Domain', controller: fb.control(`https://${v.env.LOCAL_DOMAIN}`), cmp: Input , url: true});
     inputs = [...inputs];
   });
   onDestroy(() => {
