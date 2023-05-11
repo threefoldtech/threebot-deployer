@@ -43,7 +43,6 @@
     "lodash": "^4.17.21",
     "prettier": "^2.8.4",
     "qrcode": "^1.5.1",
-    "svelte-copy": "^1.3.2",
     "tf-svelte-bulma-wc": "^1.0.10",
     "tf-svelte-rx-forms": "^1.0.3",
     "tfgrid-gql": "^1.0.0",
