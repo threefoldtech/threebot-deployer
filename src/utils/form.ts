@@ -17,8 +17,6 @@ export const deployer = fb.group({
     [
       async (ctrl) => {
         try {
-          console.log('ctrl.value', ctrl.value);
-
           await getGrid(ctrl.value);
         } catch (e) {
           console.log(e);

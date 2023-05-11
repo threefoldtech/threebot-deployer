@@ -83,7 +83,12 @@ export async function main() {
   if (displayDeployerComponent) {
     download('Deployer');
     await import('./Deployer.svelte');
+    
     appTerminal.remove();
+  
+    download('Mastodon List Weblet');
+    await import('./DeploymentList.svelte');
+    
   }
 }
 

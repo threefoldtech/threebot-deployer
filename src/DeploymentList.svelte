@@ -62,13 +62,15 @@
   async function listDeployments() {
     loading = true;
     const grid = await getGrid(mnemonic$.value);
-    const names = await grid.machines.list();
+    const names = await grid.machines.list();    
     const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
     const _instances: any[] = [];
     const _billingRate: any[] = [];
     const rates: Promise<Decimal>[] = [];
     for await (const item of items) {
       const i = item?.at(0);
+      console.log("i", i);
+      
       if (i) {
         _instances.push(i);
         rates.push(

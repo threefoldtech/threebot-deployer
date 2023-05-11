@@ -259,9 +259,10 @@
     </b-notification>
   {/if}
 
-  {#if (mnemonic$.valid || (!mnemonic$.valid && mnemonic$.error === noBalanceMessage)) && twinId}
+  <!-- Remove the qr code for now -->
+  <!-- {#if (mnemonic$.valid || (!mnemonic$.valid && mnemonic$.error === noBalanceMessage)) && twinId}
     <Qrcode data="TFT:{bridge}?message=twin_{twinId}&sender=me&amount=100" />
-  {/if}
+  {/if} -->
 
   <div class="is-flex is-jutify-content-center mb-2">
     <div style:width="100%">

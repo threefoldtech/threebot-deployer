@@ -1,4 +1,4 @@
-<svelte:options tag="tf-deployer-modal" />
+<svelte:options tag="tf-deployer-delete-modal" />
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
