@@ -61,6 +61,7 @@
 
   async function listDeployments() {
     try {
+      loading = true;
       const grid = await getGrid(mnemonic$.value);
       const names = await grid.machines.list();
       const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
@@ -91,6 +92,7 @@
       billingRate = _billingRate;
     } catch (e) {
       console.log(e);
+    } finally{
       loading = false;
     }
   }
@@ -108,9 +110,7 @@
   let table: Table;
 
   export function reload() {
-    loading = true;
-    listDeployments();
-    loading = false;
+    return listDeployments();    
   }
 
   export function setDisabled(value: boolean) {

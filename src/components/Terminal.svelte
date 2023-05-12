@@ -21,7 +21,9 @@
       state: _stateType,
       status: sts,
     });
-    logger.scrollTop = logger.clientHeight;
+    requestAnimationFrame(() => {
+      logger.scrollTop = logger.clientHeight;
+    })
   }
 
   const updateStatus = () => {
@@ -69,7 +71,7 @@
 
       {#if logs && logs.length}
         {#each logs as log}
-          <div style:margin-top="3px">
+          <div style:margin-top="3px" style:margin-bottom="7px">
             {log.status === TerminalStatus.failed ? '-' : '+'}
             <span style:color="white">{log.state} |</span>
             <span
