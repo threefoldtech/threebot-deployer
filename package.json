@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "yarn format && npx eslint --fix --ext .js,.ts,.svelte ./src",
+    "deploy": "yarn gh-pages -d dist",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|svelte)\""
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-svelte3": "^4.0.0",
+    "gh-pages": "^5.0.0",
     "lodash": "^4.17.21",
     "prettier": "^2.8.4",
     "qrcode": "^1.5.1",

@@ -51,7 +51,7 @@ async function connectingToMetaMas() {
     appTerminal.commit(
       'Connecting to MetaMask',
       'Failed to connect to MetaMask, Please ensure that you have installed the Metamask browser extension',
-      TerminalStatus.pending,
+      TerminalStatus.failed,
     );
   }
 }
