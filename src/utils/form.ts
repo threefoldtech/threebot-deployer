@@ -67,7 +67,7 @@ export const deployer = fb.group({
     ],
   ],
   flist: [
-    'https://hub.grid.tf/tf-official-vms/ubuntu-22.04.flist',
+    'https://hub.grid.tf/tf-official-apps/mattermost-latest.flist',
     [
       validators.required('deployer instance\'s flist is required.'),
       validators.isURL('The flist should be a link.'),

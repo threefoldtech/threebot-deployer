@@ -3,7 +3,7 @@
 <script lang="ts">
   import { TerminalStatus, type TerminalHistory } from '../utils/terminal';
 
-  let pindingMessage: string;
+  let pendingMessage: string;
   let intervalId: NodeJS.Timer | undefined;
 
   let logs: TerminalHistory[] = [];
@@ -22,7 +22,7 @@
       status: sts,
     });
     requestAnimationFrame(() => {
-      logger.scrollTop = logger.clientHeight;
+      logger.scrollTop = logger.scrollHeight;
     })
   }
 
@@ -31,11 +31,11 @@
     if (logs.length) {
       const lastMessage = logs[logs.length - 1];
       switch (lastMessage.status) {
-      case TerminalStatus.pinding:
+      case TerminalStatus.pending:
         let counter = 1;
         intervalId = setInterval(() => {
           const dots = '.'.repeat(counter);
-          pindingMessage = `${lastMessage.message}${dots}`;
+          pendingMessage = `${lastMessage.message}${dots}`;
           counter = (counter % 3) + 1;
         }, 500);
         break;
@@ -79,8 +79,8 @@
                 ? 'red'
                 : 'wheat'}
             >
-              {log.status === TerminalStatus.pinding && pindingMessage
-                ? pindingMessage
+              {log.status === TerminalStatus.pending && pendingMessage
+                ? pendingMessage
                 : log.message}
             </span>
           </div>

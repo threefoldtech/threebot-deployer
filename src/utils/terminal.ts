@@ -1,7 +1,7 @@
 export enum TerminalStatus {
   requested = 'requested',
   responsed = 'responsed',
-  pinding = 'pinding',
+  pending = 'pending',
   success = 'success',
   failed = 'failed',
 }

@@ -17,7 +17,7 @@ async function connectingToMetaMas() {
   appTerminal.commit(
     'Connecting to MetaMask',
     'Please ensure that you have installed the Metamask browser extension. This process may take a few seconds',
-    TerminalStatus.pinding,
+    TerminalStatus.pending,
   );
 
   let web3: Web3;
@@ -51,7 +51,7 @@ async function connectingToMetaMas() {
     appTerminal.commit(
       'Connecting to MetaMask',
       'Failed to connect to MetaMask, Please ensure that you have installed the Metamask browser extension',
-      TerminalStatus.pinding,
+      TerminalStatus.pending,
     );
   }
 }
@@ -81,12 +81,12 @@ export async function main() {
   await connectingToMetaMas();
 
   if (displayDeployerComponent) {
-    download('Deployer');
+    download('Deployer Component');
     await import('./Deployer.svelte');
 
     appTerminal.remove();
 
-    download('Mastodon List Weblet');
+    download('Deployemt List Component');
     await import('./DeploymentList.svelte');
   }
 }

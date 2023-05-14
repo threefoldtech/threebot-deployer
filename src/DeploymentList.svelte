@@ -6,10 +6,13 @@
   import { getGrid, getNameAndGatewayContracts, deployer } from './utils';
   import { Decimal } from 'decimal.js';
   import type { Table } from 'tf-svelte-bulma-wc';
+  import { get_current_component } from 'svelte/internal';
 
   const { Table, btn } = window.tfSvelteBulmaWc;
   const mnemonic = deployer.get('mnemonic');
   $: mnemonic$ = $mnemonic;
+
+  window.deploymentList = get_current_component();
 
   let loading = false;
   let _openDeleteModal = false;
@@ -60,41 +63,36 @@
   }
 
   async function listDeployments() {
-    try {
-      loading = true;
-      const grid = await getGrid(mnemonic$.value);
-      const names = await grid.machines.list();
-      const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
-      const _instances: any[] = [];
-      const _billingRate: any[] = [];
-      const rates: Promise<Decimal>[] = [];
-      for await (const item of items) {
-        const i = item?.at(0);
-        if (i) {
-          _instances.push(i);
-          rates.push(
-            Promise.all(
-              (await getNameAndGatewayContracts(mnemonic$.value, i.name))
-                .concat(i.contractId)
-                .map((id) => grid.contracts.getConsumption({ id })),
-            ).then((p) => p.reduce((a, b) => a.add(b), new Decimal('0'))),
-          );
-        }
-      }
-      for await (const item of rates) {
-        _billingRate.push(
-          item.isNaN() || item.lessThanOrEqualTo(0)
-            ? 'No Data Available'
-            : item.toFixed() + ' TFT/hour',
+    loading = true;
+    const grid = await getGrid(mnemonic$.value);
+    const names = await grid.machines.list();
+    const items = names.map((n) => grid.machines.getObj(n).catch(() => null));
+    let _instances: any[] = [];
+    let _billingRate: any[] = [];
+    let rates: Promise<Decimal>[] = [];
+    for await (const item of items) {
+      const i = item?.at(0);
+      if (i) {
+        _instances.push(i);
+        rates.push(
+          Promise.all(
+            (await getNameAndGatewayContracts(mnemonic$.value, i.name))
+              .concat(i.contractId)
+              .map((id) => grid.contracts.getConsumption({ id }))
+          ).then((p) => p.reduce((a, b) => a.add(b), new Decimal("0")))
         );
       }
-      instances = _instances;
-      billingRate = _billingRate;
-    } catch (e) {
-      console.log(e);
-    } finally{
-      loading = false;
     }
+    for await (const item of rates) {
+      _billingRate.push(
+        item.isNaN() || item.lessThanOrEqualTo(0)
+          ? "No Data Available"
+          : item.toFixed() + " TFT/hour"
+      );
+    }
+    instances = _instances;
+    billingRate = _billingRate;
+    loading = false;
   }
 
   let __mnemonicValid = false;
@@ -113,7 +111,7 @@
     return listDeployments();    
   }
 
-  export function setDisabled(value: boolean) {
+  export function setDisabled(value: boolean) {    
     disableReload = value;
   }
 </script>

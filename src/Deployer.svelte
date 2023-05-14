@@ -110,7 +110,7 @@
         rootFsSize: 2,
         disks: [
           {
-            name: generateString(15, 'disk'),
+            name: generateString(5, 'disk'),
             mountPoint: '/var/lib/docker',
             size: value.disk,
           },
@@ -120,6 +120,13 @@
           { key: 'TFCHAIN_KEY', value: value.mnemonic },
           { key: 'ETH_PUBLIC_KEY', value: $metaMaskPK },
           { key: 'LOCAL_DOMAIN', value: `${domainName}.${nodeDomain}` },
+          { key: 'DB_PASSWORD', value: generateString(3, 'password') },
+          { key: 'SITE_URL', value: `https://${domainName}.${nodeDomain}/` },
+          { key: 'MATTERMOST_DOMAIN', value: `${domainName}.${nodeDomain}` },
+          { key: 'SMTPUsername', value: generateString(5, 'user') },
+          { key: 'SMTPPassword', value: generateString(5, 'password@') },
+          { key: 'SMTPServer', value: "smtp.gmail.com" },
+          { key: 'SMTPPort', value: "8000" },
         ],
         metadata: JSON.stringify({
           type: 'vm',
